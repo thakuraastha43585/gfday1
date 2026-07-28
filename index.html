@@ -375,7 +375,7 @@ input:focus,textarea:focus{border-color:var(--dusty-rose);}
   </div>
 
   <!-- MUSIC: song.mp3 lives at the repo root next to this HTML file. -->
-  <audio id="previewMusic" loop src="song.mp3"></audio>
+  <audio id="previewMusic" loop src="song.mp3" onerror="console.error('previewMusic failed to LOAD (check song.mp3 exists/isn\'t an LFS pointer):', this.error)"></audio>
 
   <!-- STEP 3 — PAYMENT -->
   <div class="step" id="stepPayment" style="position:relative;">
@@ -531,7 +531,7 @@ input:focus,textarea:focus{border-color:var(--dusty-rose);}
 
   <!-- MUSIC: same file as the preview player above — keep the src the same
        in both places. -->
-  <audio id="bgMusic" loop src="song.mp3"></audio>
+  <audio id="bgMusic" loop src="song.mp3" onerror="console.error('bgMusic failed to LOAD (check song.mp3 exists/isn\'t an LFS pointer):', this.error)"></audio>
 </div>
 
 <script>
@@ -604,7 +604,8 @@ const COUPONS = {
   "FIRSTLOVE": { type: "flat",    value: 29, label: "₹29 off" },
   "AUGUST1":   { type: "percent", value: 20, label: "20% off — Girlfriend's Day special" },
   "LOVE50":    { type: "percent", value: 50, label: "50% off" },
-  "SWEET60":   { type: "percent", value: 60, label: "60% off — limited time" }
+  "SWEET60":   { type: "percent", value: 60, label: "60% off — limited time" },
+  "FREEBIE":   { type: "percent", value: 100, label: "100% off — free" }
 };
 const BASE_PRICE_INR = 129;
 const RAZORPAY_KEY_ID = "rzp_live_TH7gs9nI1yjgD8";
@@ -664,7 +665,7 @@ function applyCoupon(code, base = BASE_PRICE_INR){
   const c = COUPONS[(code || "").trim().toUpperCase()];
   if (!c) return { valid:false, amount: base, label:null };
   let amount = c.type === "percent" ? base - Math.round(base * c.value / 100) : base - c.value;
-  amount = Math.max(amount, 1);
+  amount = Math.max(amount, 0);
   return { valid:true, amount, label:c.label };
 }
 function fileToDataUrl(file){
@@ -925,7 +926,13 @@ function initCreatorFlow(){
 
   const previewMusic = document.getElementById('previewMusic');
   document.getElementById('storyMusicBtn').addEventListener('click', function(){
-    if (previewMusic.paused){ previewMusic.volume = 0.5; previewMusic.play().catch(()=>{}); this.textContent = '🔊'; }
+    if (previewMusic.paused){
+      previewMusic.volume = 0.5;
+      previewMusic.play().then(()=>{ this.textContent = '🔊'; }).catch(err=>{
+        console.error('Music failed to play (preview):', err);
+        alert('Song could not play: ' + err.message);
+      });
+    }
     else { previewMusic.pause(); this.textContent = '🔈'; }
   });
 
@@ -968,9 +975,29 @@ function initCreatorFlow(){
     }
   });
 
-  document.getElementById('payBtn').addEventListener('click', () => {
+  document.getElementById('payBtn').addEventListener('click', async () => {
     const draft = loadDraft();
     if (!draft) { alert("Please fill in the form first."); return; }
+
+    // Free (100%-off coupon) — nothing to charge, so skip Razorpay entirely.
+    if (currentAmount <= 0) {
+      const btn = document.getElementById('payBtn');
+      btn.disabled = true; btn.textContent = "Generating your link…";
+      try {
+        const id = await saveCard({ ...draft, paid: true, payment_id: "free_coupon" });
+        const url = new URL(window.location.href);
+        url.search = '';
+        url.searchParams.set('id', id);
+        document.getElementById('finalLink').value = url.toString();
+        document.getElementById('payCard').style.display = 'none';
+        document.getElementById('linkBox').classList.add('show');
+      } catch (err) {
+        console.error("Couldn't generate the free link:", err);
+        alert("Something went wrong generating your link — please try again.");
+        btn.disabled = false; btn.textContent = "Pay & get her link";
+      }
+      return;
+    }
 
     const options = {
       key: RAZORPAY_KEY_ID,
@@ -1025,14 +1052,22 @@ async function initRecipientView(id){
   const audioEl = document.getElementById('bgMusic');
   const musicBtn = document.getElementById('musicBtn');
   musicBtn.addEventListener('click', () => {
-    if (audioEl.paused){ audioEl.volume = 0.55; audioEl.play().catch(()=>{}); musicBtn.textContent = '🔊'; }
+    if (audioEl.paused){
+      audioEl.volume = 0.55;
+      audioEl.play().then(()=>{ musicBtn.textContent = '🔊'; }).catch(err=>{
+        console.error('Music failed to play (recipient toggle):', err);
+        alert('Song could not play: ' + err.message);
+      });
+    }
     else { audioEl.pause(); musicBtn.textContent = '🔈'; }
   });
   document.getElementById('startOverlay').addEventListener('click', function(){
     this.remove();
     audioEl.volume = 0.55;
-    audioEl.play().catch(()=>{});
-    musicBtn.textContent = '🔊';
+    audioEl.play().then(()=>{ musicBtn.textContent = '🔊'; }).catch(err=>{
+      console.error('Music failed to play (start overlay):', err);
+      alert('Song could not play: ' + err.message);
+    });
   }, { once:true });
 
   const pages = [...document.querySelectorAll('.recipient-page')];
