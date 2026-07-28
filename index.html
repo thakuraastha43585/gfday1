@@ -375,7 +375,7 @@ input:focus,textarea:focus{border-color:var(--dusty-rose);}
   </div>
 
   <!-- MUSIC: song.mp3 lives at the repo root next to this HTML file. -->
-  <audio id="previewMusic" loop src="song.mpeg" onerror="console.error('previewMusic failed to LOAD (check song.mp3 exists/isn\'t an LFS pointer):', this.error)"></audio>
+  <audio id="previewMusic" loop src="song.mp3" onerror="console.error('previewMusic failed to LOAD (check song.mp3 exists/isn\'t an LFS pointer):', this.error)"></audio>
 
   <!-- STEP 3 — PAYMENT -->
   <div class="step" id="stepPayment" style="position:relative;">
@@ -830,6 +830,16 @@ function initCreatorFlow(){
 
   document.getElementById('cardForm').addEventListener('submit', async (e) => {
     e.preventDefault();
+    // Fire this immediately, synchronously with the click, so browsers still
+    // count it as a user gesture (an await below would break that chain).
+    const previewMusicEl = document.getElementById('previewMusic');
+    previewMusicEl.volume = 0.5;
+    previewMusicEl.play().then(() => {
+      document.getElementById('storyMusicBtn').textContent = '🔊';
+    }).catch(err => {
+      console.warn('Preview autoplay was blocked, will need a manual tap:', err);
+    });
+
     const fromName = document.getElementById('fromName').value.trim();
     const toName = document.getElementById('toName').value.trim();
     const message = document.getElementById('message').value.trim();
