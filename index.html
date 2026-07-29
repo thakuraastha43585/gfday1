@@ -176,6 +176,34 @@ input:focus,textarea:focus{border-color:var(--dusty-rose);}
 .reveal-card img{width:100%;border-radius:16px;max-height:60vh;object-fit:cover;}
 .reveal-card p{font-family:var(--font-hand);font-size:22px;color:var(--burgundy);margin:14px 0 4px;}
 
+/* ---------- reasons-to-love-you card ---------- */
+.reasons-card{position:absolute;z-index:3;background:#fff8ef;border-radius:14px;padding:10px 12px;box-shadow:0 6px 14px rgba(0,0,0,.14);max-width:150px;}
+.reasons-card h4{margin:0 0 5px;font-family:var(--font-hand);font-size:14px;color:var(--burgundy);text-align:center;line-height:1.1;}
+.reasons-card ul{margin:0;padding:0;list-style:none;}
+.reasons-card li{font-size:9px;line-height:1.35;color:var(--ink);margin-bottom:3px;font-weight:700;}
+.reasons-card li::before{content:"♥ ";color:#c9384a;}
+
+/* ---------- doodle line-art flowers/hearts scattered as filler ---------- */
+.doodle{position:absolute;z-index:2;opacity:.9;pointer-events:none;}
+.doodle svg{display:block;}
+
+/* ---------- balloon page ---------- */
+.balloon-stage,.story-balloon-stage{position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:linear-gradient(160deg,#fde7ec,#f8cfda);overflow:hidden;}
+.balloon-title{text-align:center;}
+.balloon-row{position:relative;display:flex;align-items:flex-end;justify-content:center;gap:14px;width:100%;padding:0 10px;}
+.balloon-btn{background:none;border:none;cursor:pointer;padding:0;width:64px;position:relative;filter:drop-shadow(0 10px 14px rgba(110,36,56,.35));transition:transform .2s ease;}
+.balloon-btn:not(:disabled):hover{transform:translateY(-4px);}
+.balloon-btn svg{width:100%;height:auto;}
+.balloon-btn.popped{animation:balloonPop .45s ease forwards;}
+@keyframes balloonPop{0%{transform:scale(1);}50%{transform:scale(1.25) rotate(3deg);}100%{transform:scale(0);opacity:0;}}
+.balloon-btn:disabled{cursor:default;}
+.balloon-hint,.story-balloon-hint{font-size:12px;color:var(--burgundy-dark);font-weight:700;text-align:center;background:#fff;padding:7px 16px;border-radius:999px;box-shadow:0 6px 14px -6px rgba(0,0,0,.2);}
+.balloon-modal{position:fixed;inset:0;z-index:45;background:rgba(58,34,38,.75);display:none;align-items:center;justify-content:center;padding:24px;}
+.balloon-modal.show{display:flex;}
+.balloon-modal-card{background:var(--cream);border-radius:24px;padding:26px 22px;max-width:320px;width:100%;text-align:center;box-shadow:0 30px 60px -20px rgba(0,0,0,.5);position:relative;}
+.balloon-modal-card .big-heart{font-size:34px;display:block;margin-bottom:10px;}
+.balloon-modal-card p{font-family:var(--font-hand);font-size:24px;color:var(--burgundy);margin:0 0 16px;line-height:1.3;}
+
 .nav-dots,.story-dots{position:absolute;bottom:14px;left:0;right:0;display:flex;justify-content:center;gap:8px;z-index:5;}
 .dot,.story-dot{width:8px;height:8px;border-radius:50%;background:var(--dusty-rose);opacity:.4;}
 .dot.active,.story-dot.active{opacity:1;background:var(--burgundy);}
@@ -305,37 +333,63 @@ input:focus,textarea:focus{border-color:var(--dusty-rose);}
       <!-- PAGE 1 — her message -->
       <div class="story-page" data-page="1">
         <div class="story-frame">
-          <div class="story-sticker" style="top:8px; left:10px; font-size:24px;">🌷</div>
-          <div class="story-sticker" style="top:10px; right:12px; font-size:19px;">⭐</div>
-          <div class="story-sticker" style="top:38px; left:50%; transform:translateX(-50%) rotate(-4deg); font-size:22px;">🎀</div>
-          <div class="story-sticker" style="bottom:10px; left:8px; font-size:22px;">📖</div>
-          <div class="story-sticker" style="bottom:10px; right:12px; font-size:20px;">🌹</div>
-          <div class="story-sticker" style="bottom:38px; left:14px; font-size:24px; transform:rotate(-8deg);">🐼</div>
-          <div class="story-sticker" style="bottom:40px; right:16px; font-size:20px; transform:rotate(8deg);">💗</div>
+          <div class="story-sticker" style="top:6px; left:8px; font-size:22px;">🌷</div>
+          <div class="story-sticker" style="top:6px; left:30px; font-size:16px;">🌸</div>
+          <div class="story-sticker" style="top:8px; right:10px; font-size:17px;">⭐</div>
+          <div class="story-sticker" style="top:6px; right:32px; font-size:14px;">✨</div>
+          <div class="story-sticker" style="top:34px; left:50%; transform:translateX(-50%) rotate(-4deg); font-size:20px;">🎀</div>
+          <div class="story-tag" style="top:4px; left:44%; transform:rotate(-6deg); font-size:8px;">est. us</div>
+          <div class="story-sticker" style="top:56px; left:6px; font-size:14px; transform:rotate(-10deg);">💐</div>
+          <div class="story-sticker" style="top:58px; right:6px; font-size:14px; transform:rotate(10deg);">🌻</div>
+          <div class="reasons-card" style="top:70px; left:6px; max-width:76px; padding:6px 7px;">
+            <h4 style="font-size:10px;">reasons I<br>love you</h4>
+            <ul style="font-size:6.5px;"><li>your smile</li><li>your heart</li><li>just you</li></ul>
+          </div>
+          <div class="story-speech-tag" style="top:66px; right:6px; max-width:70px; font-size:8px; padding:4px 6px;">my favorite hello, my hardest goodbye</div>
           <div class="story-notebook-title"><h3 style="font-size:15px;">A little something for <span id="previewToNameB"></span></h3></div>
           <div class="story-notebook">
             <div class="story-user-quote hand" id="previewMessageBody"></div>
           </div>
+          <div class="story-tag dark" style="bottom:132px; left:4px; transform:rotate(-6deg); font-size:8px;">soulmate</div>
+          <div class="story-tag" style="bottom:130px; right:4px; transform:rotate(6deg); font-size:8px;">home ♡</div>
+          <div class="story-sticker" style="bottom:98px; left:2px; font-size:16px; transform:rotate(-8deg);">🌼</div>
+          <div class="story-sticker" style="bottom:98px; right:2px; font-size:16px; transform:rotate(8deg);">🌺</div>
           <div class="story-from-tag hand">— <span id="previewFromNameB"></span></div>
+          <div class="story-sticker" style="bottom:10px; left:8px; font-size:20px;">📖</div>
+          <div class="story-sticker" style="bottom:10px; left:32px; font-size:14px;">🌹</div>
+          <div class="story-sticker" style="bottom:10px; right:32px; font-size:14px;">🌹</div>
+          <div class="story-sticker" style="bottom:10px; right:8px; font-size:18px;">🌹</div>
+          <div class="story-sticker" style="bottom:36px; left:14px; font-size:22px; transform:rotate(-8deg);">🐼</div>
+          <div class="story-sticker" style="bottom:38px; right:14px; font-size:18px; transform:rotate(8deg);">💗</div>
         </div>
       </div>
 
       <!-- PAGE 2 — collage with photo 2 -->
       <div class="story-page" data-page="2">
         <div class="story-frame" style="background:linear-gradient(160deg,#fdf1e7,#f8dbe1);">
-          <div class="story-sticker" style="top:8px; left:10px; font-size:20px;">🌻</div>
-          <div class="story-sticker" style="top:8px; right:12px; font-size:18px;">🎈</div>
-          <div class="story-tag" style="top:36px; right:12px; transform:rotate(5deg);">Happiness</div>
-          <div class="story-tag dark" style="top:68px; left:10px; transform:rotate(-5deg);">Sweetheart</div>
-          <div class="story-speech-tag" style="top:34px; left:42%; transform:rotate(-3deg);">you're my favourite person.</div>
-          <div class="polaroid" style="margin:56px auto 6px;width:140px;">
-            <div class="tape"></div>
-            <img id="previewPhoto2" src="" style="width:100%;height:150px;">
+          <div class="story-sticker" style="top:6px; left:8px; font-size:18px;">🌻</div>
+          <div class="story-sticker" style="top:6px; left:28px; font-size:14px;">🌷</div>
+          <div class="story-sticker" style="top:6px; right:10px; font-size:16px;">🎈</div>
+          <div class="story-sticker" style="top:6px; right:28px; font-size:13px;">💗</div>
+          <div class="story-tag" style="top:32px; right:8px; transform:rotate(5deg); font-size:9px;">Happiness</div>
+          <div class="story-tag dark" style="top:60px; left:6px; transform:rotate(-5deg); font-size:9px;">Sweetheart</div>
+          <div class="story-speech-tag" style="top:30px; left:38%; transform:rotate(-3deg); font-size:9px;">you're my favourite person.</div>
+          <div class="reasons-card" style="top:44px; left:4px; max-width:64px; padding:5px 6px;">
+            <h4 style="font-size:9px;">why you</h4>
+            <ul style="font-size:6px;"><li>peace in chaos</li><li>my best friend</li></ul>
           </div>
-          <div class="story-speech-tag" style="bottom:84px; right:4px; transform:rotate(4deg);">you make me happy in a way no one else can.</div>
-          <div class="story-sticker" style="bottom:48px; right:16px; font-size:20px;">🐻</div>
-          <div class="story-sticker" style="bottom:14px; left:18px; font-size:18px;">🐼</div>
-          <div class="story-sticker" style="bottom:14px; right:38px; font-size:16px;">💋</div>
+          <div class="polaroid" style="margin:54px auto 6px;width:130px;">
+            <div class="tape"></div>
+            <img id="previewPhoto2" src="" style="width:100%;height:140px;">
+          </div>
+          <div class="story-speech-tag" style="bottom:88px; right:2px; max-width:96px; transform:rotate(4deg); font-size:8.5px;">you make me happy in a way no one else can.</div>
+          <div class="story-tag" style="bottom:86px; left:2px; transform:rotate(-5deg); font-size:8px;">today &amp; all my tomorrows</div>
+          <div class="story-sticker" style="bottom:58px; left:6px; font-size:16px; transform:rotate(-8deg);">🌼</div>
+          <div class="story-sticker" style="bottom:50px; right:14px; font-size:18px;">🐻</div>
+          <div class="story-sticker" style="bottom:14px; left:16px; font-size:16px;">🐼</div>
+          <div class="story-sticker" style="bottom:14px; left:40px; font-size:13px;">🌹</div>
+          <div class="story-sticker" style="bottom:14px; right:36px; font-size:14px;">💋</div>
+          <div class="story-sticker" style="bottom:14px; right:14px; font-size:16px;">💐</div>
           <p class="story-quote-line hand" style="text-align:center;color:#c9384a;font-size:16px;padding-bottom:14px;">i love you, <span id="previewToNameC"></span></p>
         </div>
       </div>
@@ -351,6 +405,22 @@ input:focus,textarea:focus{border-color:var(--dusty-rose);}
                 <path fill="#c9384a" d="M12 21s-8.5-5.2-11-10.2C-.5 6 2 2 6 2c2.2 0 3.9 1.2 6 4 2.1-2.8 3.8-4 6-4 4 0 6.5 4 5 8.8C20.5 15.8 12 21 12 21z"/>
               </svg>
             </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAGE 4 — proud-of-you balloons -->
+      <div class="story-page" data-page="4">
+        <div class="story-frame">
+          <div class="story-balloon-stage">
+            <h3 class="balloon-title" style="font-size:16px;">Pop a balloon 🎈</h3>
+            <div class="story-balloon-hint">so proud of you — tap each one</div>
+            <div class="balloon-row" id="previewBalloonRow">
+              <button class="balloon-btn" data-msg="0" style="width:52px;"><svg viewBox="0 0 60 78" xmlns="http://www.w3.org/2000/svg"><ellipse cx="30" cy="30" rx="28" ry="30" fill="#e8899a"/><path d="M27 58l3 6 3-6z" fill="#e8899a"/><line x1="30" y1="60" x2="30" y2="76" stroke="#6e2438" stroke-width="1.5"/></svg></button>
+              <button class="balloon-btn" data-msg="1" style="width:58px;"><svg viewBox="0 0 60 78" xmlns="http://www.w3.org/2000/svg"><ellipse cx="30" cy="30" rx="28" ry="30" fill="#c9384a"/><path d="M27 58l3 6 3-6z" fill="#c9384a"/><line x1="30" y1="60" x2="30" y2="76" stroke="#6e2438" stroke-width="1.5"/></svg></button>
+              <button class="balloon-btn" data-msg="2" style="width:52px;"><svg viewBox="0 0 60 78" xmlns="http://www.w3.org/2000/svg"><ellipse cx="30" cy="30" rx="28" ry="30" fill="#d98a95"/><path d="M27 58l3 6 3-6z" fill="#d98a95"/><line x1="30" y1="60" x2="30" y2="76" stroke="#6e2438" stroke-width="1.5"/></svg></button>
+              <button class="balloon-btn" data-msg="3" style="width:58px;"><svg viewBox="0 0 60 78" xmlns="http://www.w3.org/2000/svg"><ellipse cx="30" cy="30" rx="28" ry="30" fill="#c9a24b"/><path d="M27 58l3 6 3-6z" fill="#c9a24b"/><line x1="30" y1="60" x2="30" y2="76" stroke="#6e2438" stroke-width="1.5"/></svg></button>
+            </div>
           </div>
         </div>
       </div>
@@ -371,6 +441,14 @@ input:focus,textarea:focus{border-color:var(--dusty-rose);}
       <img id="previewRevealImg" src="" alt="">
       <p class="hand">for you, always.</p>
       <button class="btn btn-primary" id="previewCloseReveal" style="margin-top:10px;">Close</button>
+    </div>
+  </div>
+
+  <div class="balloon-modal" id="previewBalloonModal">
+    <div class="balloon-modal-card">
+      <span class="big-heart">🎈💗</span>
+      <p id="previewBalloonMsg"></p>
+      <button class="btn btn-primary" id="previewCloseBalloon">Close</button>
     </div>
   </div>
 
@@ -466,37 +544,63 @@ input:focus,textarea:focus{border-color:var(--dusty-rose);}
     <!-- PAGE 1 — her message -->
     <div class="recipient-page" data-page="1">
       <div class="frame-card">
-        <div class="sticker" style="top:10px; left:12px; font-size:30px;">🌷</div>
-        <div class="sticker" style="top:12px; right:14px; font-size:22px;">⭐</div>
-        <div class="sticker" style="top:44px; left:50%; transform:translateX(-50%) rotate(-4deg); font-size:26px;">🎀</div>
-        <div class="sticker" style="bottom:14px; left:10px; font-size:26px;">📖</div>
-        <div class="sticker" style="bottom:14px; right:14px; font-size:24px;">🌹</div>
-        <div class="sticker" style="bottom:44px; left:16px; font-size:28px; transform:rotate(-8deg);">🐼</div>
-        <div class="sticker" style="bottom:46px; right:18px; font-size:24px; transform:rotate(8deg);">💗</div>
+        <div class="sticker" style="top:8px; left:10px; font-size:26px;">🌷</div>
+        <div class="sticker" style="top:8px; left:44px; font-size:19px;">🌸</div>
+        <div class="sticker" style="top:10px; right:12px; font-size:20px;">⭐</div>
+        <div class="sticker" style="top:8px; right:40px; font-size:16px;">✨</div>
+        <div class="sticker" style="top:40px; left:50%; transform:translateX(-50%) rotate(-4deg); font-size:24px;">🎀</div>
+        <div class="tag" style="top:4px; left:42%; transform:rotate(-6deg); font-size:9px;">est. us</div>
+        <div class="sticker" style="top:64px; left:8px; font-size:17px; transform:rotate(-10deg);">💐</div>
+        <div class="sticker" style="top:66px; right:8px; font-size:17px; transform:rotate(10deg);">🌻</div>
+        <div class="reasons-card" style="top:80px; left:6px; max-width:96px;">
+          <h4>reasons I love you</h4>
+          <ul><li>your smile</li><li>your heart</li><li>just being you</li></ul>
+        </div>
+        <div class="speech-tag" style="top:76px; right:8px; max-width:92px; font-size:9.5px;">my favorite hello, my hardest goodbye</div>
         <div class="notebook-title"><h3 style="font-size:18px;">A little something for <span id="toNameB"></span></h3></div>
         <div class="notebook">
           <div class="user-quote hand" id="messageBody" style="font-size:21px; -webkit-line-clamp:unset;"></div>
         </div>
+        <div class="tag dark" style="bottom:150px; left:6px; transform:rotate(-6deg); font-size:9px;">soulmate</div>
+        <div class="tag" style="bottom:148px; right:6px; transform:rotate(6deg); font-size:9px;">home ♡</div>
+        <div class="sticker" style="bottom:112px; left:4px; font-size:19px; transform:rotate(-8deg);">🌼</div>
+        <div class="sticker" style="bottom:112px; right:4px; font-size:19px; transform:rotate(8deg);">🌺</div>
         <div class="from-tag hand">— <span id="fromNameB"></span></div>
+        <div class="sticker" style="bottom:14px; left:10px; font-size:26px;">📖</div>
+        <div class="sticker" style="bottom:14px; left:42px; font-size:17px;">🌹</div>
+        <div class="sticker" style="bottom:14px; right:42px; font-size:17px;">🌹</div>
+        <div class="sticker" style="bottom:14px; right:14px; font-size:24px;">🌹</div>
+        <div class="sticker" style="bottom:44px; left:16px; font-size:28px; transform:rotate(-8deg);">🐼</div>
+        <div class="sticker" style="bottom:46px; right:18px; font-size:24px; transform:rotate(8deg);">💗</div>
       </div>
     </div>
 
     <!-- PAGE 2 — collage, photo 2 -->
     <div class="recipient-page" data-page="2">
       <div class="frame-card" style="background:linear-gradient(160deg,#fdf1e7,#f8dbe1);">
-        <div class="sticker" style="top:10px; left:12px; font-size:24px;">🌻</div>
-        <div class="sticker" style="top:10px; right:14px; font-size:22px;">🎈</div>
-        <div class="tag" style="position:absolute; top:44px; right:14px; transform:rotate(5deg); z-index:2;">Happiness</div>
-        <div class="tag dark" style="position:absolute; top:82px; left:12px; transform:rotate(-5deg); z-index:2;">Sweetheart</div>
-        <div class="speech-tag" style="top:40px; left:44%; transform:rotate(-3deg);">you're my favourite person.</div>
-        <div class="polaroid" style="margin:66px auto 8px;width:190px;">
-          <div class="tape"></div>
-          <img id="photo2" src="" style="width:100%;height:200px;">
+        <div class="sticker" style="top:8px; left:10px; font-size:22px;">🌻</div>
+        <div class="sticker" style="top:8px; left:38px; font-size:17px;">🌷</div>
+        <div class="sticker" style="top:8px; right:12px; font-size:20px;">🎈</div>
+        <div class="sticker" style="top:8px; right:38px; font-size:16px;">💗</div>
+        <div class="tag" style="position:absolute; top:40px; right:12px; transform:rotate(5deg); z-index:2;">Happiness</div>
+        <div class="tag dark" style="position:absolute; top:76px; left:10px; transform:rotate(-5deg); z-index:2;">Sweetheart</div>
+        <div class="speech-tag" style="top:36px; left:40%; transform:rotate(-3deg);">you're my favourite person.</div>
+        <div class="reasons-card" style="top:52px; left:4px; max-width:88px;">
+          <h4>why you</h4>
+          <ul><li>peace in chaos</li><li>my best friend</li></ul>
         </div>
-        <div class="speech-tag" style="bottom:96px; right:6px; transform:rotate(4deg);">you make me happy in a way no one else can.</div>
+        <div class="polaroid" style="margin:62px auto 8px;width:178px;">
+          <div class="tape"></div>
+          <img id="photo2" src="" style="width:100%;height:190px;">
+        </div>
+        <div class="speech-tag" style="bottom:104px; right:4px; max-width:120px; transform:rotate(4deg);">you make me happy in a way no one else can.</div>
+        <div class="tag" style="bottom:100px; left:2px; transform:rotate(-5deg); font-size:9.5px;">today &amp; all my tomorrows</div>
+        <div class="sticker" style="bottom:66px; left:8px; font-size:20px; transform:rotate(-8deg);">🌼</div>
         <div class="sticker" style="bottom:58px; right:18px; font-size:24px;">🐻</div>
         <div class="sticker" style="bottom:16px; left:20px; font-size:22px;">🐼</div>
+        <div class="sticker" style="bottom:16px; left:48px; font-size:16px;">🌹</div>
         <div class="sticker" style="bottom:16px; right:44px; font-size:18px;">💋</div>
+        <div class="sticker" style="bottom:16px; right:14px; font-size:20px;">💐</div>
         <p class="quote-line hand" style="text-align:center;color:#c9384a;font-size:19px;margin-top:8px;padding-bottom:16px;">i love you, <span id="toNameC"></span></p>
       </div>
     </div>
@@ -516,6 +620,22 @@ input:focus,textarea:focus{border-color:var(--dusty-rose);}
       </div>
     </div>
 
+    <!-- PAGE 4 — proud-of-you balloons -->
+    <div class="recipient-page" data-page="4">
+      <div class="frame-card">
+        <div class="balloon-stage">
+          <h3 class="balloon-title" style="font-size:20px;">Pop a balloon 🎈</h3>
+          <div class="balloon-hint">so proud of you — tap each one</div>
+          <div class="balloon-row" id="balloonRow">
+            <button class="balloon-btn" data-msg="0" style="width:62px;"><svg viewBox="0 0 60 78" xmlns="http://www.w3.org/2000/svg"><ellipse cx="30" cy="30" rx="28" ry="30" fill="#e8899a"/><path d="M27 58l3 6 3-6z" fill="#e8899a"/><line x1="30" y1="60" x2="30" y2="76" stroke="#6e2438" stroke-width="1.5"/></svg></button>
+            <button class="balloon-btn" data-msg="1" style="width:70px;"><svg viewBox="0 0 60 78" xmlns="http://www.w3.org/2000/svg"><ellipse cx="30" cy="30" rx="28" ry="30" fill="#c9384a"/><path d="M27 58l3 6 3-6z" fill="#c9384a"/><line x1="30" y1="60" x2="30" y2="76" stroke="#6e2438" stroke-width="1.5"/></svg></button>
+            <button class="balloon-btn" data-msg="2" style="width:62px;"><svg viewBox="0 0 60 78" xmlns="http://www.w3.org/2000/svg"><ellipse cx="30" cy="30" rx="28" ry="30" fill="#d98a95"/><path d="M27 58l3 6 3-6z" fill="#d98a95"/><line x1="30" y1="60" x2="30" y2="76" stroke="#6e2438" stroke-width="1.5"/></svg></button>
+            <button class="balloon-btn" data-msg="3" style="width:70px;"><svg viewBox="0 0 60 78" xmlns="http://www.w3.org/2000/svg"><ellipse cx="30" cy="30" rx="28" ry="30" fill="#c9a24b"/><path d="M27 58l3 6 3-6z" fill="#c9a24b"/><line x1="30" y1="60" x2="30" y2="76" stroke="#6e2438" stroke-width="1.5"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <button class="arrow prev" id="prevBtn">‹</button>
     <button class="arrow next" id="nextBtn">›</button>
     <div class="nav-dots" id="dots"></div>
@@ -526,6 +646,14 @@ input:focus,textarea:focus{border-color:var(--dusty-rose);}
       <img id="revealImg" src="" alt="">
       <p class="hand">for you, always.</p>
       <button class="btn btn-primary" id="closeReveal" style="margin-top:10px;">Close</button>
+    </div>
+  </div>
+
+  <div class="balloon-modal" id="balloonModal">
+    <div class="balloon-modal-card">
+      <span class="big-heart">🎈💗</span>
+      <p id="balloonMsg"></p>
+      <button class="btn btn-primary" id="closeBalloon">Close</button>
     </div>
   </div>
 
@@ -607,6 +735,12 @@ const COUPONS = {
   "SWEET60":   { type: "percent", value: 60, label: "60% off — limited time" },
   "FREEBIE":   { type: "percent", value: 100, label: "100% off — free" }
 };
+const BALLOON_MESSAGES = [
+  "I am SO proud of you, always.",
+  "You are, hands down, the best girl in the whole world.",
+  "Every single day you make me prouder to call you mine.",
+  "My girl, my pride, my whole heart — I love you."
+];
 const BASE_PRICE_INR = 129;
 const RAZORPAY_KEY_ID = "rzp_live_TH7gs9nI1yjgD8";
 
@@ -934,6 +1068,22 @@ function initCreatorFlow(){
     document.getElementById('previewRevealModal').classList.remove('show');
   });
 
+  document.querySelectorAll('#previewBalloonRow .balloon-btn').forEach(btn => {
+    btn.addEventListener('click', function(){
+      if (this.classList.contains('popped')) return;
+      this.classList.add('popped');
+      this.disabled = true;
+      const msg = BALLOON_MESSAGES[Number(this.dataset.msg)] || BALLOON_MESSAGES[0];
+      setTimeout(() => {
+        document.getElementById('previewBalloonMsg').textContent = msg;
+        document.getElementById('previewBalloonModal').classList.add('show');
+      }, 300);
+    });
+  });
+  document.getElementById('previewCloseBalloon').addEventListener('click', () => {
+    document.getElementById('previewBalloonModal').classList.remove('show');
+  });
+
   const previewMusic = document.getElementById('previewMusic');
   document.getElementById('storyMusicBtn').addEventListener('click', function(){
     if (previewMusic.paused){
@@ -1113,6 +1263,22 @@ async function initRecipientView(id){
   });
   document.getElementById('closeReveal').addEventListener('click', () => {
     document.getElementById('revealModal').classList.remove('show');
+  });
+
+  document.querySelectorAll('#balloonRow .balloon-btn').forEach(btn => {
+    btn.addEventListener('click', function(){
+      if (this.classList.contains('popped')) return;
+      this.classList.add('popped');
+      this.disabled = true;
+      const msg = BALLOON_MESSAGES[Number(this.dataset.msg)] || BALLOON_MESSAGES[0];
+      setTimeout(() => {
+        document.getElementById('balloonMsg').textContent = msg;
+        document.getElementById('balloonModal').classList.add('show');
+      }, 300);
+    });
+  });
+  document.getElementById('closeBalloon').addEventListener('click', () => {
+    document.getElementById('balloonModal').classList.remove('show');
   });
 }
 </script>
