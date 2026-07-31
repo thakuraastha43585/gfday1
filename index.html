@@ -126,6 +126,8 @@ input:focus,textarea:focus{border-color:var(--dusty-rose);}
 
 /* central taped polaroid photo, matches reference */
 .polaroid{position:relative;background:#fff;padding:8px 8px 10px;border-radius:4px;box-shadow:0 12px 26px -10px rgba(0,0,0,.4);}
+.polaroid.big{width:84%;box-shadow:0 18px 36px -10px rgba(0,0,0,.5);}
+.polaroid.big img{aspect-ratio:3/4;height:auto !important;width:100%;}
 .polaroid img{display:block;width:100%;height:100%;object-fit:cover;border-radius:1px;background:#000;}
 .tape{position:absolute;top:-14px;left:50%;transform:translateX(-50%) rotate(-3deg);width:70px;height:22px;background:rgba(255,255,255,.55);border:1px solid rgba(0,0,0,.05);box-shadow:0 2px 4px rgba(0,0,0,.1);z-index:5;}
 
@@ -152,10 +154,24 @@ input:focus,textarea:focus{border-color:var(--dusty-rose);}
 .story-notebook::before{left:30px;}
 .notebook-title,.story-notebook-title{text-align:center;padding:20px 20px 0;}
 .story-notebook-title{padding:16px 16px 0;}
-.user-quote,.story-user-quote{flex:1;min-height:0;overflow:auto;text-align:center;font-size:19px;line-height:1.5;padding:6px 22px;color:var(--ink);}
-.story-user-quote{font-size:17px;padding:6px 18px;}
-.from-tag,.story-from-tag{text-align:center;font-size:19px;color:var(--burgundy);padding-bottom:14px;}
-.story-from-tag{font-size:16px;padding-bottom:12px;}
+.user-quote,.story-user-quote{flex:1;min-height:0;overflow:auto;text-align:center;font-size:23px;line-height:1.55;padding:6px 22px;color:var(--ink);}
+.story-user-quote{font-size:19px;padding:6px 18px;}
+.from-tag,.story-from-tag{text-align:center;font-size:22px;color:var(--burgundy);padding-bottom:14px;}
+.story-from-tag{font-size:18px;padding-bottom:12px;}
+
+/* ---------- romantic animation utilities, used to keep every page feeling alive ---------- */
+@keyframes gentleFloat{0%,100%{transform:translateY(0) rotate(var(--rot,0deg));}50%{transform:translateY(-9px) rotate(var(--rot,0deg));}}
+@keyframes twinkle{0%,100%{opacity:.35;transform:scale(.85);}50%{opacity:1;transform:scale(1.15);}}
+@keyframes heartbeat{0%,100%{transform:scale(1);}25%{transform:scale(1.14);}40%{transform:scale(.98);}60%{transform:scale(1.1);}100%{transform:scale(1);}}
+@keyframes driftRotate{0%{transform:rotate(-6deg);}50%{transform:rotate(6deg);}100%{transform:rotate(-6deg);}}
+@keyframes softGlow{0%,100%{opacity:.5;}50%{opacity:1;}}
+.anim-float{animation:gentleFloat 3.6s ease-in-out infinite;}
+.anim-twinkle{animation:twinkle 2.2s ease-in-out infinite;}
+.anim-beat{animation:heartbeat 2.6s ease-in-out infinite;}
+.anim-drift{animation:driftRotate 4.4s ease-in-out infinite;}
+.anim-glow{animation:softGlow 2.4s ease-in-out infinite;}
+.mini-doodle{position:absolute;z-index:2;pointer-events:none;line-height:1;}
+@media (prefers-reduced-motion: reduce){.anim-float,.anim-twinkle,.anim-beat,.anim-drift,.anim-glow{animation:none !important;}}
 
 /* heart reveal page */
 .heart-stage,.story-heart-stage{position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px; background:linear-gradient(160deg,#fbdce3,#f6c6d1);}
@@ -306,27 +322,28 @@ input:focus,textarea:focus{border-color:var(--dusty-rose);}
       <div class="story-page active" data-page="0">
         <div class="story-frame textured" id="storyCollageA">
           <div class="story-torn-edge"></div>
-          <div class="story-sticker" style="top:6px;left:6px;font-size:26px;">💐</div>
-          <div class="story-sticker" style="top:2px;left:45%;font-size:20px;">🧿</div>
-          <div class="story-tag" style="top:22px;right:8px;transform:rotate(6deg);">Happiness</div>
-          <div class="story-tag dark" style="top:52px;left:8px;transform:rotate(-6deg);">Cutie</div>
-          <div class="story-speech-tag" style="top:44px;left:36%;transform:rotate(-3deg);">"You're my favorite person."</div>
-          <div class="vstrip left" style="top:80px;left:10px;">You are my sun, my moon,</div>
-          <div class="vstrip" style="top:78px;right:10px;">You make me happy in a way no one else can</div>
-          <div class="darling-note hand" style="top:118px;left:8px;font-size:12px;">My darling, all I want is to be your moon and show you all the little stars of my heart.</div>
-          <div class="polaroid" style="margin:0 auto;position:absolute;top:100px;left:50%;transform:translateX(-50%);width:150px;height:190px;">
+          <div class="story-sticker anim-float" style="top:2%;left:4%;font-size:22px;--rot:-6deg;">💐</div>
+          <div class="story-sticker anim-twinkle" style="top:1%;left:45%;font-size:18px;">🧿</div>
+          <div class="mini-doodle anim-twinkle" style="top:3%;right:4%;font-size:13px;">✨</div>
+          <div class="story-tag anim-drift" style="top:9%;right:5%;">Happiness</div>
+          <div class="story-tag dark" style="top:16%;left:5%;transform:rotate(-6deg);">Cutie</div>
+          <div class="story-speech-tag" style="top:13%;left:50%;transform:translateX(-50%) rotate(-3deg);">"You're my favorite person."</div>
+          <div class="mini-doodle anim-beat" style="top:23%;left:3%;font-size:14px;">💗</div>
+          <div class="mini-doodle anim-float" style="top:23%;right:3%;font-size:14px;--rot:6deg;">🌸</div>
+          <div class="polaroid big" style="position:absolute;top:28%;left:50%;transform:translateX(-50%);">
             <div class="tape"></div>
-            <img id="previewPhoto1" src="" style="width:100%;height:158px;">
+            <img id="previewPhoto1" src="">
           </div>
-          <div class="story-sticker" style="bottom:96px;left:6px;font-size:26px;">🧸</div>
-          <div class="story-tag" style="bottom:112px;left:34px;transform:rotate(-4deg);font-size:8.5px;">I LOVE YOU</div>
-          <div class="story-sticker" style="bottom:96px;right:8px;font-size:24px;">🐼</div>
-          <p class="story-repeat-love hand" style="position:absolute;bottom:64px;left:12px;right:12px;">i love you, i love you,<br>i love you, i love you.</p>
-          <div class="blur-text" style="bottom:56px;right:10px;font-size:11px;">but here I<br>blur into you</div>
-          <div class="story-tag" style="bottom:26px;left:8px;transform:rotate(-4deg);">my beautiful<br>dream</div>
-          <div class="story-sticker" style="bottom:6px;left:70px;font-size:20px;">💐</div>
-          <div class="kiss-tag" style="bottom:10px;right:56px;">💋</div>
-          <div class="bow-corner" style="bottom:6px;right:8px;">🎀</div>
+          <div class="mini-doodle anim-float" style="top:38%;left:2%;font-size:13px;--rot:-8deg;">🌷</div>
+          <div class="mini-doodle anim-float" style="top:50%;right:2%;font-size:13px;--rot:8deg;">🌹</div>
+          <div class="mini-doodle anim-twinkle" style="top:60%;left:2%;font-size:12px;">⭐</div>
+          <div class="darling-note hand" style="top:70%;left:5%;font-size:11px;max-width:108px;">My darling, all I want is to be your moon and show you all the little stars of my heart.</div>
+          <div class="story-sticker anim-float" style="top:70%;right:5%;font-size:22px;--rot:6deg;">🧸</div>
+          <div class="story-tag" style="top:80%;left:8%;transform:rotate(-4deg);font-size:8.5px;">I LOVE YOU</div>
+          <p class="story-repeat-love hand" style="position:absolute;top:83%;left:8%;right:8%;font-size:17px;">i love you, i love you,<br>i love you, i love you.</p>
+          <div class="mini-doodle anim-twinkle" style="top:90%;left:4%;font-size:13px;">🎀</div>
+          <div class="mini-doodle anim-float" style="top:90%;right:4%;font-size:13px;--rot:-8deg;">🐼</div>
+          <div class="kiss-tag anim-beat" style="top:95%;left:50%;transform:translateX(-50%);font-size:16px;">💋</div>
         </div>
       </div>
 
@@ -337,7 +354,7 @@ input:focus,textarea:focus{border-color:var(--dusty-rose);}
           <div class="story-sticker" style="top:6px; left:30px; font-size:16px;">🌸</div>
           <div class="story-sticker" style="top:8px; right:10px; font-size:17px;">⭐</div>
           <div class="story-sticker" style="top:6px; right:32px; font-size:14px;">✨</div>
-          <div class="story-sticker" style="top:34px; left:50%; transform:translateX(-50%) rotate(-4deg); font-size:20px;">🎀</div>
+          <div class="story-sticker anim-drift" style="top:34px; left:50%; transform-origin:center; font-size:20px;">🎀</div>
           <div class="story-tag" style="top:4px; left:44%; transform:rotate(-6deg); font-size:8px;">est. us</div>
           <div class="story-sticker" style="top:56px; left:6px; font-size:14px; transform:rotate(-10deg);">💐</div>
           <div class="story-sticker" style="top:58px; right:6px; font-size:14px; transform:rotate(10deg);">🌻</div>
@@ -367,30 +384,30 @@ input:focus,textarea:focus{border-color:var(--dusty-rose);}
       <!-- PAGE 2 — collage with photo 2 -->
       <div class="story-page" data-page="2">
         <div class="story-frame" style="background:linear-gradient(160deg,#fdf1e7,#f8dbe1);">
-          <div class="story-sticker" style="top:6px; left:8px; font-size:18px;">🌻</div>
-          <div class="story-sticker" style="top:6px; left:28px; font-size:14px;">🌷</div>
-          <div class="story-sticker" style="top:6px; right:10px; font-size:16px;">🎈</div>
-          <div class="story-sticker" style="top:6px; right:28px; font-size:13px;">💗</div>
-          <div class="story-tag" style="top:32px; right:8px; transform:rotate(5deg); font-size:9px;">Happiness</div>
-          <div class="story-tag dark" style="top:60px; left:6px; transform:rotate(-5deg); font-size:9px;">Sweetheart</div>
-          <div class="story-speech-tag" style="top:30px; left:38%; transform:rotate(-3deg); font-size:9px;">you're my favourite person.</div>
-          <div class="reasons-card" style="top:44px; left:4px; max-width:64px; padding:5px 6px;">
+          <div class="story-sticker anim-float" style="top:2%; left:4%; font-size:15px;--rot:-6deg;">🌻</div>
+          <div class="mini-doodle anim-twinkle" style="top:2%; right:4%; font-size:13px;">🎈</div>
+          <div class="story-tag anim-drift" style="top:8%; right:5%; font-size:9px;">Happiness</div>
+          <div class="story-tag dark" style="top:15%; left:5%; transform:rotate(-5deg); font-size:9px;">Sweetheart</div>
+          <div class="story-speech-tag" style="top:12%; left:50%; transform:translateX(-50%) rotate(-3deg); font-size:9px;">you're my favourite person.</div>
+          <div class="reasons-card" style="top:22%; left:4%; max-width:64px; padding:5px 6px;">
             <h4 style="font-size:9px;">why you</h4>
             <ul style="font-size:6px;"><li>peace in chaos</li><li>my best friend</li></ul>
           </div>
-          <div class="polaroid" style="margin:54px auto 6px;width:130px;">
+          <div class="mini-doodle anim-beat" style="top:22%; right:4%; font-size:13px;">💗</div>
+          <div class="polaroid big" style="position:absolute;top:30%;left:50%;transform:translateX(-50%);">
             <div class="tape"></div>
-            <img id="previewPhoto2" src="" style="width:100%;height:140px;">
+            <img id="previewPhoto2" src="">
           </div>
-          <div class="story-speech-tag" style="bottom:88px; right:2px; max-width:96px; transform:rotate(4deg); font-size:8.5px;">you make me happy in a way no one else can.</div>
-          <div class="story-tag" style="bottom:86px; left:2px; transform:rotate(-5deg); font-size:8px;">today &amp; all my tomorrows</div>
-          <div class="story-sticker" style="bottom:58px; left:6px; font-size:16px; transform:rotate(-8deg);">🌼</div>
-          <div class="story-sticker" style="bottom:50px; right:14px; font-size:18px;">🐻</div>
+          <div class="mini-doodle anim-float" style="top:40%; left:2%; font-size:12px;--rot:-8deg;">🌼</div>
+          <div class="mini-doodle anim-float" style="top:52%; right:2%; font-size:12px;--rot:8deg;">🌺</div>
+          <div class="story-speech-tag" style="top:74%; right:2%; max-width:96px; transform:rotate(4deg); font-size:8.5px;">you make me happy in a way no one else can.</div>
+          <div class="story-tag" style="top:80%; left:2%; transform:rotate(-5deg); font-size:8px;">today &amp; all my tomorrows</div>
+          <div class="story-sticker anim-float" style="top:88%; right:14px; font-size:18px;--rot:6deg;">🐻</div>
           <div class="story-sticker" style="bottom:14px; left:16px; font-size:16px;">🐼</div>
           <div class="story-sticker" style="bottom:14px; left:40px; font-size:13px;">🌹</div>
-          <div class="story-sticker" style="bottom:14px; right:36px; font-size:14px;">💋</div>
+          <div class="story-sticker anim-beat" style="bottom:14px; right:36px; font-size:14px;">💋</div>
           <div class="story-sticker" style="bottom:14px; right:14px; font-size:16px;">💐</div>
-          <p class="story-quote-line hand" style="text-align:center;color:#c9384a;font-size:16px;padding-bottom:14px;">i love you, <span id="previewToNameC"></span></p>
+          <p class="story-quote-line hand" style="text-align:center;color:#c9384a;font-size:21px;padding-bottom:14px;">i love you, <span id="previewToNameC"></span></p>
         </div>
       </div>
 
@@ -517,27 +534,28 @@ input:focus,textarea:focus{border-color:var(--dusty-rose);}
     <div class="recipient-page active" data-page="0">
       <div class="frame-card textured">
         <div class="torn-edge"></div>
-        <div class="sticker" style="top:8px;left:8px;font-size:32px;">💐</div>
-        <div class="sticker" style="top:2px;left:45%;font-size:24px;">🧿</div>
-        <div class="tag" style="top:26px;right:10px;transform:rotate(6deg);">Happiness</div>
-        <div class="tag dark" style="top:60px;left:10px;transform:rotate(-6deg);">Cutie</div>
-        <div class="speech-tag" style="top:52px;left:36%;transform:rotate(-3deg);">"You're my favorite person, <span id="toNameCollage"></span>."</div>
-        <div class="vstrip left" style="top:96px;left:12px;">You are my sun, my moon,</div>
-        <div class="vstrip" style="top:92px;right:12px;">You make me happy in a way no one else can</div>
-        <div class="darling-note hand" style="top:138px;left:10px;font-size:13px;">My darling, all I want is to be your moon and show you all the little stars of my heart.</div>
-        <div class="polaroid" style="position:absolute;top:118px;left:50%;transform:translateX(-50%);width:172px;">
+        <div class="sticker anim-float" style="top:2%;left:4%;font-size:28px;--rot:-6deg;">💐</div>
+        <div class="sticker anim-twinkle" style="top:1%;left:45%;font-size:22px;">🧿</div>
+        <div class="mini-doodle anim-twinkle" style="top:3%;right:4%;font-size:16px;">✨</div>
+        <div class="tag anim-drift" style="top:9%;right:5%;transform-origin:center;">Happiness</div>
+        <div class="tag dark" style="top:16%;left:5%;transform:rotate(-6deg);">Cutie</div>
+        <div class="speech-tag" style="top:13%;left:50%;transform:translateX(-50%) rotate(-3deg);">"You're my favorite person, <span id="toNameCollage"></span>."</div>
+        <div class="mini-doodle anim-beat" style="top:23%;left:3%;font-size:18px;">💗</div>
+        <div class="mini-doodle anim-float" style="top:23%;right:3%;font-size:18px;--rot:6deg;">🌸</div>
+        <div class="polaroid big" style="position:absolute;top:28%;left:50%;transform:translateX(-50%);">
           <div class="tape"></div>
-          <img id="photo1" src="" style="width:100%;height:218px;">
+          <img id="photo1" src="">
         </div>
-        <div class="sticker" style="bottom:114px;left:10px;font-size:30px;">🧸</div>
-        <div class="tag" style="bottom:132px;left:42px;transform:rotate(-4deg);font-size:9.5px;">I LOVE YOU</div>
-        <div class="sticker" style="bottom:112px;right:10px;font-size:28px;">🐼</div>
-        <p class="repeat-love hand" style="position:absolute;bottom:74px;left:16px;right:16px;">i love you, i love you, i love you, i love you.</p>
-        <div class="blur-text" style="bottom:64px;right:14px;font-size:13px;">but here I<br>blur into you</div>
-        <div class="tag" style="bottom:30px;left:10px;transform:rotate(-4deg);">my beautiful<br>dream</div>
-        <div class="sticker" style="bottom:8px;left:78px;font-size:22px;">💐</div>
-        <div class="kiss-tag" style="bottom:12px;right:64px;font-size:20px;">💋</div>
-        <div class="bow-corner" style="bottom:8px;right:10px;">🎀</div>
+        <div class="mini-doodle anim-float" style="top:38%;left:2%;font-size:17px;--rot:-8deg;">🌷</div>
+        <div class="mini-doodle anim-float" style="top:50%;right:2%;font-size:17px;--rot:8deg;">🌹</div>
+        <div class="mini-doodle anim-twinkle" style="top:60%;left:2%;font-size:15px;">⭐</div>
+        <div class="darling-note hand" style="top:70%;left:6%;font-size:13px;max-width:130px;">My darling, all I want is to be your moon and show you all the little stars of my heart.</div>
+        <div class="sticker anim-float" style="top:70%;right:6%;font-size:28px;--rot:6deg;">🧸</div>
+        <div class="tag" style="top:80%;left:8%;transform:rotate(-4deg);font-size:9.5px;">I LOVE YOU</div>
+        <p class="repeat-love hand" style="position:absolute;top:83%;left:8%;right:8%;font-size:22px;">i love you, i love you,<br>i love you, i love you.</p>
+        <div class="mini-doodle anim-twinkle" style="top:90%;left:4%;font-size:16px;">🎀</div>
+        <div class="mini-doodle anim-float" style="top:90%;right:4%;font-size:16px;--rot:-8deg;">🐼</div>
+        <div class="kiss-tag anim-beat" style="top:95%;left:50%;transform:translateX(-50%);font-size:20px;">💋</div>
       </div>
     </div>
 
@@ -548,7 +566,7 @@ input:focus,textarea:focus{border-color:var(--dusty-rose);}
         <div class="sticker" style="top:8px; left:44px; font-size:19px;">🌸</div>
         <div class="sticker" style="top:10px; right:12px; font-size:20px;">⭐</div>
         <div class="sticker" style="top:8px; right:40px; font-size:16px;">✨</div>
-        <div class="sticker" style="top:40px; left:50%; transform:translateX(-50%) rotate(-4deg); font-size:24px;">🎀</div>
+        <div class="sticker anim-drift" style="top:40px; left:50%; transform-origin:center; font-size:24px;">🎀</div>
         <div class="tag" style="top:4px; left:42%; transform:rotate(-6deg); font-size:9px;">est. us</div>
         <div class="sticker" style="top:64px; left:8px; font-size:17px; transform:rotate(-10deg);">💐</div>
         <div class="sticker" style="top:66px; right:8px; font-size:17px; transform:rotate(10deg);">🌻</div>
@@ -578,30 +596,30 @@ input:focus,textarea:focus{border-color:var(--dusty-rose);}
     <!-- PAGE 2 — collage, photo 2 -->
     <div class="recipient-page" data-page="2">
       <div class="frame-card" style="background:linear-gradient(160deg,#fdf1e7,#f8dbe1);">
-        <div class="sticker" style="top:8px; left:10px; font-size:22px;">🌻</div>
-        <div class="sticker" style="top:8px; left:38px; font-size:17px;">🌷</div>
-        <div class="sticker" style="top:8px; right:12px; font-size:20px;">🎈</div>
-        <div class="sticker" style="top:8px; right:38px; font-size:16px;">💗</div>
-        <div class="tag" style="position:absolute; top:40px; right:12px; transform:rotate(5deg); z-index:2;">Happiness</div>
-        <div class="tag dark" style="position:absolute; top:76px; left:10px; transform:rotate(-5deg); z-index:2;">Sweetheart</div>
-        <div class="speech-tag" style="top:36px; left:40%; transform:rotate(-3deg);">you're my favourite person.</div>
-        <div class="reasons-card" style="top:52px; left:4px; max-width:88px;">
+        <div class="sticker anim-float" style="top:2%; left:4%; font-size:22px;--rot:-6deg;">🌻</div>
+        <div class="mini-doodle anim-twinkle" style="top:2%; right:4%; font-size:18px;">🎈</div>
+        <div class="tag anim-drift" style="position:absolute; top:8%; right:5%; z-index:2;">Happiness</div>
+        <div class="tag dark" style="position:absolute; top:15%; left:5%; transform:rotate(-5deg); z-index:2;">Sweetheart</div>
+        <div class="speech-tag" style="top:12%; left:50%; transform:translateX(-50%) rotate(-3deg);">you're my favourite person.</div>
+        <div class="reasons-card" style="top:22%; left:4%; max-width:88px;">
           <h4>why you</h4>
           <ul><li>peace in chaos</li><li>my best friend</li></ul>
         </div>
-        <div class="polaroid" style="margin:62px auto 8px;width:178px;">
+        <div class="mini-doodle anim-beat" style="top:22%; right:4%; font-size:18px;">💗</div>
+        <div class="polaroid big" style="position:absolute;top:30%;left:50%;transform:translateX(-50%);">
           <div class="tape"></div>
-          <img id="photo2" src="" style="width:100%;height:190px;">
+          <img id="photo2" src="">
         </div>
-        <div class="speech-tag" style="bottom:104px; right:4px; max-width:120px; transform:rotate(4deg);">you make me happy in a way no one else can.</div>
-        <div class="tag" style="bottom:100px; left:2px; transform:rotate(-5deg); font-size:9.5px;">today &amp; all my tomorrows</div>
-        <div class="sticker" style="bottom:66px; left:8px; font-size:20px; transform:rotate(-8deg);">🌼</div>
-        <div class="sticker" style="bottom:58px; right:18px; font-size:24px;">🐻</div>
+        <div class="mini-doodle anim-float" style="top:40%; left:2%; font-size:16px;--rot:-8deg;">🌼</div>
+        <div class="mini-doodle anim-float" style="top:52%; right:2%; font-size:16px;--rot:8deg;">🌺</div>
+        <div class="speech-tag" style="top:74%; right:2%; max-width:130px; transform:rotate(4deg);">you make me happy in a way no one else can.</div>
+        <div class="tag" style="top:80%; left:2%; transform:rotate(-5deg); font-size:9.5px;">today &amp; all my tomorrows</div>
+        <div class="sticker anim-float" style="top:88%; right:18px; font-size:24px;--rot:6deg;">🐻</div>
         <div class="sticker" style="bottom:16px; left:20px; font-size:22px;">🐼</div>
         <div class="sticker" style="bottom:16px; left:48px; font-size:16px;">🌹</div>
-        <div class="sticker" style="bottom:16px; right:44px; font-size:18px;">💋</div>
+        <div class="sticker anim-beat" style="bottom:16px; right:44px; font-size:18px;">💋</div>
         <div class="sticker" style="bottom:16px; right:14px; font-size:20px;">💐</div>
-        <p class="quote-line hand" style="text-align:center;color:#c9384a;font-size:19px;margin-top:8px;padding-bottom:16px;">i love you, <span id="toNameC"></span></p>
+        <p class="quote-line hand" style="text-align:center;color:#c9384a;font-size:26px;margin-top:8px;padding-bottom:16px;">i love you, <span id="toNameC"></span></p>
       </div>
     </div>
 
